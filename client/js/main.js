@@ -1,6 +1,3 @@
-const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://your-heroku-app.herokuapp.com' 
-    : 'http://localhost:3000';
 const translations = {
     en: {
         title: "Massage Chair Reservation",
@@ -141,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reservation storage functions
     async function saveReservation(reservation) {
         try {
-            const response = await fetch(`${API_URL}/api/reservations`, {
+            const response = await fetch(`/api/reservations`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -160,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function getReservations() {
         try {
-            const response = await fetch(`${API_URL}/api/reservations`);
+            const response = await fetch(`/api/reservations`);
             if (!response.ok) {
                 throw new Error('Failed to fetch reservations');
             }
@@ -173,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function canUserReserve(userId) {
         try {
-            const response = await fetch(`${API_URL}/api/user-reservations/${userId}`);
+            const response = await fetch(`/api/user-reservations/${userId}`);
             if (!response.ok) {
                 throw new Error('Failed to check user reservations');
             }
@@ -236,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function cancelReservation(id) {
         try {
-            const response = await fetch(`${API_URL}/api/reservations/${id}`, {
+            const response = await fetch(`/api/reservations/${id}`, {
                 method: 'DELETE'
             });
             if (!response.ok) {
@@ -285,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             const response = await fetch(
-                `${API_URL}/api/available-slots?date=${formattedDate}&location=${locationSelect.value}`
+                `/api/available-slots?date=${formattedDate}&location=${locationSelect.value}`
             );
             if (!response.ok) {
                 throw new Error('Failed to fetch available slots');
@@ -309,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function isChairAvailable(date, location, timeSlot, chair) {
         try {
             const response = await fetch(
-                `${API_URL}/api/check-availability?date=${date}&location=${location}&timeSlot=${timeSlot}&chair=${chair}`
+                `/api/check-availability?date=${date}&location=${location}&timeSlot=${timeSlot}&chair=${chair}`
             );
             if (!response.ok) {
                 throw new Error('Failed to check chair availability');
@@ -373,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            const response = await fetch(`${API_URL}/api/user-reservations/${userId}`);
+            const response = await fetch(`/api/user-reservations/${userId}`);
             const reservations = await response.json();
             
             if (reservations.length === 0) {
