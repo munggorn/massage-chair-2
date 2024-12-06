@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massage Chair Reservation</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+	<div class="language-switcher">
+		<button id="langToggle" class="lang-btn">
+			<span class="lang-text">EN</span>
+			<span class="lang-icon">🌐</span>
+		</button>
+	</div>
+	
+    <div class="background-container">
+        <div class="content-wrapper">
+            <div class="logo-container">
+                <img src="assets/images/company_logo.png" alt="Company Logo" class="company-logo">
+                <img src="assets/images/program_logo.png" alt="Program Logo" class="program-logo">
+            </div>
+
+            <div class="main-content-area">
+                <div class="container">
+                    <h1>Massage Chair Reservation</h1>
+                    
+                    <div class="reservation-form">
+                        <!-- Your existing form groups -->
+                        <div class="form-group">
+                            <label for="date">Select Date:</label>
+                            <input type="date" id="date" required>
+							<span class="helper-text">Select today or tomorrow only</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Select Location:</label>
+                            <select id="location" required>
+                                <option value="">-- Select Location --</option>
+                                <option value="MCB1">MCB1</option>
+                                <option value="Satelite">Satelite</option>
+                                <option value="MCB2">MCB2</option>
+                                <option value="MCB_TPX">MCB TPX/LABIX/อาคาร Amenity</option>
+                                <option value="TPX_Admin">TPX Admin (ENMF)</option>
+                                <option value="MCB_TLB">MCB TLB</option>
+                                <option value="TLB_Admin">TLB Admin (CFP, ENME)</option>
+                                <option value="EBC">EBC</option>
+                                <option value="LAB">LAB</option>
+                                <option value="CFP">CFP (Area 8)</option>
+                                <option value="TSB">TSB</option>
+                                <option value="ENCO">ENCO</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeSlot">Select Available Time Slot:</label>
+                            <select id="timeSlot" required disabled>
+                                <option value="">-- First Select Location --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label id="chairLabel" for="chairSelection">Select Chair:</label>
+                            <div id="chairSelection" class="chair-grid"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userId">Employee ID:</label>
+                            <input type="text" id="userId" placeholder="08001780" required>
+							<span class="helper-text">Enter your employee ID</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userName">Indicator & Name:</label>
+                            <input type="text" id="userName" placeholder="RHRD-Thanamate Panyachaianan" required>
+							<span class="helper-text">Enter your indicator followed by your full name</span>
+                            <div id="limitWarning" class="limit-warning"></div>
+                        </div>
+
+                        <button id="submitReservation">Submit Reservation</button>
+                    </div>
+                </div>
+
+                <div class="my-reservations-section">
+                    <h2>My Reservations</h2>
+                    <div class="search-reservation">
+                        <div class="search-box">
+                            <input type="text" id="checkReservationId" placeholder="Enter your employee ID">
+                            <button id="checkReservation" class="check-button">
+                                <span class="button-text">Check Reservation</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="reservationDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Simple Modal Design -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Reservation Successful!</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Reservation Details</h3>
+                <div class="details-grid">
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="date">Date:</span>
+                        <span id="modalDate" class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="location">Location:</span>
+                        <span id="modalLocation" class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="time">Time Slot:</span>
+                        <span id="modalTime" class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="chair">Chair:</span>
+                        <span id="modalChair" class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="employeeId">Employee ID:</span>
+                        <span id="modalUserId" class="detail-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-label-type="name">Name:</span>
+                        <span id="modalUserName" class="detail-value"></span>
+                    </div>
+                </div>
+                <button id="captureButton">Capture Screenshot</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/main.js"></script>
+</body>
+</html>
