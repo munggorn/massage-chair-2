@@ -220,16 +220,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 
-    function findUserReservation(userId) {
-        const reservations = getReservations();
-        const currentDate = new Date();
-        const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        
-        return reservations.find(reservation => 
-            reservation.userId === userId && 
-            new Date(reservation.timestamp) >= firstDayOfMonth
-        );
-    }
+    async function findUserReservation(userId) {
+        try {
+	    const response = await fetch(`/api/user-reservations/${userId}`);
+	    const reservations = await response.json();
+            return reservations[0]; // Return the first reservation if any
+        } catch (error) {
+	    console.error('Error finding user reservation:', error);
+	    return null;
+        }
+        }
     
     async function cancelReservation(id) {
         try {
