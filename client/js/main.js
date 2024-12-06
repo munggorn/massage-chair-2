@@ -450,27 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // }
 
 
-        // Create reservation object
-        const reservation = {
-            date: formattedDate,
-            location,
-            timeSlot: selectedTime,
-            chair: selectedChair,
-            userId,
-            userName,
-            timestamp: new Date().toISOString()
-        };
 
-        // Save reservation
-        saveReservation(reservation);
-
-        // Update modal content
-        document.getElementById('modalDate').textContent = formattedDate;
-        document.getElementById('modalLocation').textContent = location;
-        document.getElementById('modalTime').textContent = selectedTime;
-        document.getElementById('modalChair').textContent = selectedChair;
-        document.getElementById('modalUserId').textContent = userId;
-        document.getElementById('modalUserName').textContent = userName;
 
         // Show modal
         modal.classList.add('show');
